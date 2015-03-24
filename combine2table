@@ -24,4 +24,50 @@ Write a SQL query for a report that provides the following information for each 
 
 FirstName, LastName, City, State
 
-SELECT table1.FirstName , table1.LastName, table2.City, table2.State  FROM table1 INNER JOIN table2 ON table1.PersonId = table2.PersonId;
+#########
+create table Person (
+    `PersonId` int not null,
+    `FirstName` varchar(50) not null,
+    `LastName` varchar(50) not null,
+    primary key (`PersonId`)
+);
+
+create table Address (
+    `AddressId` int not null,
+    `PersonId` int not null,
+    `City` varchar(50) ,
+    `State` varchar(50) ,
+    primary key (`AddressId`)
+);
+
+	
+INSERT INTO Person
+	(`PersonId`, `FirstName`, `LastName`)
+VALUES
+	(1, 'xi', 'cheng'),
+	(2, 'wenyan', 'zhao'),
+	(3, 'xiaojun', 'ma'),
+    (4, 'nobody', 'nobody')
+;
+
+INSERT INTO Address
+	(`AddressId`,`PersonId`, `City`, `State`)
+VALUES
+	(1, 1, 'wuhan', 'hubei'),
+	(2, 2, 'beijing', 'beijing'),
+	(3, 3, null, null)
+;
+#######
+
+# 左外连接，全部表person
+
+SELECT Person.FirstName , Person.LastName, Address.City, Address.State  
+FROM Person LEFT OUTER JOIN Address 
+ON Person.PersonId = Address.PersonId
+
+==>
+FirstName	LastName	City	State
+xi	cheng	wuhan	hubei
+wenyan	zhao	beijing	beijing
+xiaojun	ma	(null)	(null)
+nobody	nobody	(null)	(null)
