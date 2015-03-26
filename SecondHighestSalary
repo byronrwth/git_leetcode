@@ -1,0 +1,30 @@
+Write a SQL query to get the second highest salary from the Employee table.
+
++----+--------+
+| Id | Salary |
++----+--------+
+| 1  | 100    |
+| 2  | 200    |
+| 3  | 300    |
++----+--------+
+For example, given the above Employee table, the second highest salary is 200. If there is no second highest salary, then the query should return null.
+
+SELECT column_name,column_name
+FROM table_name
+ORDER BY column_name,column_name ASC|DESC;
+
+用 多种嵌套 实现 Nth select 大小排序:
+
+e.g. 第三大
+
+(
+SELECT MAX(Salary) from Employee 
+WHERE Salary <  
+      (  
+         SELECT MAX(Salary) FROM Employee
+         WHERE Salary < 
+             ( 
+               SELECT MAX(Salary) FROM Employee
+             )  # 1st 第一大
+      )# 2nd 第二大
+);  # 3rd 第三大
