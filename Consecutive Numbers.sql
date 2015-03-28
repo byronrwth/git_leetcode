@@ -13,9 +13,12 @@ Write a SQL query to find all numbers that appear at least three times consecuti
 +----+-----+
 For example, given the above Logs table, 1 is the only number that appears consecutively for at least three times.
 
+<<<<<<< HEAD
 
 # Write your MySQL query statement below
 select distinct a.Num  from Logs a, Logs b, Logs c
 where b.Id  = a.Id +1 and  c.Id = b.Id +1 and b.Num = a.Num and c.Num = b.Num
 
 
+=======
+>>>>>>> c60bb9216504e985e520d414cc6dce3308204549
