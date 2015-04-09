@@ -21,16 +21,35 @@ Return
   [1,3,3,1],
  [1,4,6,4,1]
 ]
+
+
+      for n in range(numRows):
+        print "[ %d ", %(n+1), "]"
+        n += 1
+
+
 '''
+
+
 class Solution:
     # @return a list of lists of integers
+    dict = []
+    n = 0
 
     def generate(self, numRows):
-    	self.numRows = numRows
-    	n = 1
-    	for n < self.numRows:
-    		print "["
-    	return None
+        self.numRows = numRows
+        self.dict = [1]
+        
+        print "numRows: %d" % self.numRows
+        print self.dict
+
+        for n in range(numRows):
+            self.dict.append(n)
+            print "[ %s ]" % self.dict
+            n += 1
+    
+    print "static n: %d" %n
+    print "static dict: %s" %dict
 
 if __name__=='__main__':
     x=Solution()
