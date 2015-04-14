@@ -23,6 +23,21 @@ For example, given the above Scores table, your query should generate the follow
 | 3.50  | 4    |
 +-------+------+
 
+CREATE TABLE Scores
+    (`id` int, `Score` float)
+     ;
+     
+INSERT INTO Scores
+    (`id`, `Score`)
+    VALUES
+    (1, 3.50),
+    (2, 3.65),
+    (3, 4.00),
+    (4, 3.85),
+    (5, 4.00),
+    (6, 3.65)
+    ;   
+    
 """
 select Score, rank auto from Scores order by Score desc;
 
