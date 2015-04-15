@@ -38,9 +38,16 @@ INSERT INTO Employee
     (4, 'Max', 90000, 1)
     ;  
 
+INSERT INTO Employee 
+    (`Id`, `Name`, `Salary`, `DepartmentId`)
+    VALUES
+    (1, "Joe", 60000, 1),
+    (4, "Max", 60000, 2)
+    ; 
+
 
 CREATE TABLE Department 
-    (`Id`int, `Name`varchar(20), FOREIGN KEY (Id) REFERENCES Employee(DepartmentId) )
+    (`Id`int, `Name`varchar(20) )
      ;
 
 CREATE TABLE Department 
@@ -50,26 +57,24 @@ INSERT INTO Department
     (`Id`, `Name`)
     VALUES
     (1, "IT"),
-    (2, "Sales")
+    (2, "HR")
     ; 
 
- select * from Employee, Department;
- +------+-------+--------+--------------+------+-------+
+{"Employee": [[1, "Joe", 60000, 1], [4, "Max", 60000, 2]], "Department": [[1, "IT"], [2, "HR"]
+"""
+
+
+
+
++------+-------+--------+--------------+------+-------+
 | Id   | Name  | Salary | DepartmentId | Id   | Name  |
 +------+-------+--------+--------------+------+-------+
 |    1 | Joe   |  70000 |            1 |    1 | IT    |
-|    1 | Joe   |  70000 |            1 |    2 | Sales |
-|    2 | Henry |  80000 |            2 |    1 | IT    |
-|    2 | Henry |  80000 |            2 |    2 | Sales |
-|    3 | Sam   |  60000 |            2 |    1 | IT    |
-|    3 | Sam   |  60000 |            2 |    2 | Sales |
 |    4 | Max   |  90000 |            1 |    1 | IT    |
-|    4 | Max   |  90000 |            1 |    2 | Sales |
+|    2 | Henry |  80000 |            2 |    2 | Sales |
+|    3 | Sam   |  60000 |            2 |    2 | Sales |
 +------+-------+--------+--------------+------+-------+
 
-select t.Department, t.Employee, t.Salary  from (
-SELECT Department.Name as Department, Employee.Name as Employee, Employee.Salary as Salary FROM Employee LEFT OUTER JOIN Department ON Employee.DepartmentId = Department.Id)t group by t.Department 
-having t.Salary = MAX(t.Salary) ;
 
 DELETE FROM Person WHERE id IN (
     SELECT id FROM (  
@@ -82,14 +87,74 @@ DELETE FROM Person WHERE id IN (
 ); 
 
 
-+------+-------+--------+--------------+------+-------+
-| Id   | Name  | Salary | DepartmentId | Id   | Name  |
-+------+-------+--------+--------------+------+-------+
-|    1 | Joe   |  70000 |            1 |    1 | IT    |
-|    4 | Max   |  90000 |            1 |    1 | IT    |
-|    2 | Henry |  80000 |            2 |    2 | Sales |
-|    3 | Sam   |  60000 |            2 |    2 | Sales |
-+------+-------+--------+--------------+------+-------+
+mysql> SELECT Employee.Id as Id, Department.Name as Department, Employee.Name as Employee, Employee.Salary as Salary
+    ->         FROM Employee LEFT OUTER JOIN Department
+    ->         ON Employee.DepartmentId = Department.Id;
++------+------------+----------+--------+
+| Id   | Department | Employee | Salary |
++------+------------+----------+--------+
+|    1 | IT         | Joe      |  70000 |
+|    4 | IT         | Max      |  90000 |
+|    2 | Sales      | Henry    |  80000 |
+|    3 | Sales      | Sam      |  60000 |
++------+------------+----------+--------+
 
 
-select Name as Department FROM Department, Name as Employee, Salary FROM Employee ;
+mysql>     select t1.Department as Department, MAX(t1.Salary) as Salary from (
+    ->         SELECT Employee.Id as Id, Department.Name as Department, Employee.Name as Employee, Employee.Salary as Salary
+    ->         FROM Employee LEFT OUTER JOIN Department
+    ->         ON Employee.DepartmentId = Department.Id
+    ->         )t1
+    ->     group by t1.Department;
++------------+--------+
+| Department | Salary |
++------------+--------+
+| IT         |  90000 |
+| Sales      |  80000 |
++------------+--------+
+
+
+如果
+    select t1.Department as Department, t1.Employee as Employee, MAX(t1.Salary) as Salary from (
+        SELECT Employee.Id as Id, Department.Name as Department, Employee.Name as Employee, Employee.Salary as Salary 
+        FROM Employee LEFT OUTER JOIN Department 
+        ON Employee.DepartmentId = Department.Id
+        )t1 
+    group by t1.Department
+
+错误 ！
+------------+----------+--------+
+ Department | Employee | Salary |
+------------+----------+--------+
+ IT         | Joe      |  90000 |
+ Sales      | Henry    |  80000 |
+------------+----------+--------+    
+"""
+
+select t2.Department, Employee.Name as Employee, Employee.Salary as Salary from Employee LEFT OUTER JOIN (
+    select t1.Id as peopleId, t1.Department as Department, MAX(t1.Salary) as Salary from (
+        SELECT Employee.Id as Id, Department.Name as Department, Employee.Name as Employee, Employee.Salary as Salary 
+        FROM Employee LEFT OUTER JOIN Department 
+        ON Employee.DepartmentId = Department.Id
+        )t1 
+    group by t1.Department
+    )t2
+ON t2.peopleId =  Employee.Id
+;
+
+
+t2:
++------------+--------+
+| Department | Salary |
++------------+--------+
+| HR         |  60000 |
+| IT         |  60000 |
++------------+--------+
+
+employee:
++------+------+--------+--------------+
+| Id   | Name | Salary | DepartmentId |
++------+------+--------+--------------+
+|    1 | Joe  |  60000 |            1 |
+|    4 | Max  |  60000 |            2 |
++------+------+--------+--------------+
