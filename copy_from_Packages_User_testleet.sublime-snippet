@@ -21,7 +21,7 @@ public class test${2} {
 /* 
     ${2}. solution for ${3}.
 */   
-    public int ${3}() {
+    public ${4} (${5}) {
 
     }
 
@@ -34,7 +34,7 @@ public class test${2} {
 
 /**************below for Nr.${2} algorithms **********************/
 
-        example.${3}();
+        example.${4}();
 
     }
 

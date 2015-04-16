@@ -40,14 +40,16 @@ class Solution:
         self.numRows = numRows
         self.dict = [1]
         
-        print "numRows: %d" % self.numRows
-        print self.dict
+        #print "numRows: %d" % self.numRows
+        #print self.dict
 
         for n in range(numRows):
-            self.dict.append(n)
+            self.dict
             print "[ %s ]" % self.dict
             n += 1
-    
+        
+        return self.dict
+
     print "static n: %d" %n
     print "static dict: %s" %dict
 
