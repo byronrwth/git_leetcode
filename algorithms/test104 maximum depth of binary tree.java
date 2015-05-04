@@ -30,7 +30,17 @@ public class test104 {
     The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
 */   
     public int maxDepth(TreeNode root) {
+        int leftmax, rightmax = 0;
 
+        if root == null return 0;
+        if (root.left != null) {
+            leftmax = maxDepth(root.left);
+        }
+        if (root.right != null) {
+            rightmax = maxDepth(root.right);
+        }
+        if (leftmax > rightmax) return leftmax+1;
+        else return rightmax+1;
     }
 
     public static void main(String[] args) {
