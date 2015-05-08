@@ -29,3 +29,31 @@ Write a SQL query to find employees who earn the top three salaries in each of t
 | Sales      | Henry    | 80000  |
 | Sales      | Sam      | 60000  |
 +------------+----------+--------+
+
+"""
+select t2.Department, Employee.Name as Employee, Employee.Salary as Salary 
+from 
+    Employee 
+INNER JOIN 
+    (
+    select t1.DepartmentId, t1.Department, max(t1.salary) as maxSalary
+        from (
+        SELECT Employee.Id as Id, Department.Id as DepartmentId, Department.Name as Department, Employee.Name as Employee, Employee.Salary as Salary 
+        FROM 
+            Employee INNER JOIN Department 
+        ON Employee.DepartmentId = Department.Id 
+        )t1 
+        group by t1.Department 
+    )t2
+on Employee.Salary = t2.maxSalary and Employee.DepartmentId = t2.DepartmentId ;
+
++------------+----------+--------+
+| Department | Employee | Salary |
++------------+----------+--------+
+| IT         | Joe      |  60000 |
+| IT         | Max      |  60000 |
+| HR         | Henry    |  80000 |
++------------+----------+--------+
+
+extend max to top 3:
+"""
