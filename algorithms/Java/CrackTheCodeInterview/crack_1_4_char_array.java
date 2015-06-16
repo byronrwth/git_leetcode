@@ -37,8 +37,14 @@ public class crack_1_4_char_array {
         
         true_length = index;
         
-        string[index] = '\0';
-        
+        //string[index] = '\0';
+        /*
+?
+java.lang.ArrayIndexOutOfBoundsException: 25
+    at crack_1_4_char_array.replaceBlank(crack_1_4_char_array.java:44)
+    at crack_1_4_char_array.main(crack_1_4_char_array.java:77)
+
+        */
         for (i = length - 1; i >= 0; i--) {
             if (string[i] == ' ') {
                 string[index - 1] = '0';
