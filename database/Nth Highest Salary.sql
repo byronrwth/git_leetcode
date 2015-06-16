@@ -160,20 +160,25 @@ FROM
 )t2 WHERE N = t2.Rank
 );
 
-    """
-    must consider extreme case :
-    {"Employee": [[1, 100], [2, 100]]}
+"""
+must consider extreme case :
+{"Employee": [[1, 100], [2, 100]]}
 
-    if values same, then rank should be same
+if values same, then rank should be same
     
-    Solution:
-    DROP FUNCTION IF EXISTS getNthHighestSalary;
+Solution:
+DROP FUNCTION IF EXISTS getNthHighestSalary;
 CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
-    RETURN (
-SELECT Salary FROM (      
-SELECT t1.Salary, ( @rownum:=@rownum+1 ) AS Rank 
-FROM 
-  (select distinct Salary from Employee2)t1, (SELECT @rownum:=0) r order by Salary desc
-)t2 WHERE N = t2.Rank
+RETURN (
+  SELECT Salary 
+  FROM (      
+        SELECT t1.Salary, ( @rownum:=@rownum+1 ) AS Rank 
+        FROM (
+              select distinct Salary from Employee2
+              )t1, 
+             (SELECT @rownum:=0) r order by Salary desc
+        )t2 
+  WHERE N = t2.Rank
 );
-    """
+
+"""

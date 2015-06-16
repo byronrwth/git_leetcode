@@ -7,7 +7,7 @@ import java.util.*;
 /*import StdIn;
 import StdOut;*/
 
-
+import CtCILibrary.AssortedMethods;
 
 public class crack_1_4_char_array {
     
@@ -55,31 +55,30 @@ public class crack_1_4_char_array {
         return true_length;
     }
 
+
+
+
     public static void main(String[] args) {
+
         crack_1_4_char_array example = new crack_1_4_char_array();
 
-/************ below for Nr.100_same_binary_tree input ****************************/      
-        
-        // needs str to array library !!
-        //example.replaceBlank("Mr John Smith", 13);
+        String str = "asdfas s asdf sds ";
 
-
-/**************below for Nr.100_same_binary_tree algorithms **********************/
-
-    }
-    
-
-/*
-    public static void main(String[] args) {
-        String str = "abc d e f";
         char[] arr = new char[str.length() + 3 * 2 + 1];
+
         for (int i = 0; i < str.length(); i++) {
             arr[i] = str.charAt(i);
+
+            System.out.println("char array arr["+i+"]:"+arr[i]); 
         }
-        replaceSpaces(arr, str.length());   
+
+        System.out.println("char array length: "+str.length());
+
+        example.replaceBlank(arr, str.length());   
+
         System.out.println("\"" + AssortedMethods.charArrayToString(arr) + "\"");
     }
-*/
+
 
 
 }
