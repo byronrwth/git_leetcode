@@ -19,6 +19,9 @@ public class crack_1_4_char_array {
      * @param string: An array of Char
      * @param length: The true length of the string
      * @return: The true length of new string
+     * Write a method to replace all spaces in a string with %20. The string is given in a characters array, you can assume it has enough space for * replacement and you are given the true length of the string.
+     *
+     *   true length  means   not counting '\0'  !! 
      */
     public int replaceBlank(char[] string, int length) {
         
@@ -33,18 +36,13 @@ public class crack_1_4_char_array {
             }
         }
         
-        index = length + spaceCount * 2;
+        index = length + spaceCount * 2;  //true length
         
         true_length = index;
         
-        //string[index] = '\0';
-        /*
-?
-java.lang.ArrayIndexOutOfBoundsException: 25
-    at crack_1_4_char_array.replaceBlank(crack_1_4_char_array.java:44)
-    at crack_1_4_char_array.main(crack_1_4_char_array.java:77)
+        // the last character in char array should be '\0',  thoug        
+        string[index] = '\0';
 
-        */
         for (i = length - 1; i >= 0; i--) {
             if (string[i] == ' ') {
                 string[index - 1] = '0';
@@ -68,9 +66,9 @@ java.lang.ArrayIndexOutOfBoundsException: 25
 
         crack_1_4_char_array example = new crack_1_4_char_array();
 
-        String str = "asdfas s asdf sds ";
+        String str = "asdfas s asdf sds "; // 4 spaces !
 
-        char[] arr = new char[str.length() + 3 * 2 + 1];
+        char[] arr = new char[str.length() + 4 * 2 + 1]; // 4 s
 
         for (int i = 0; i < str.length(); i++) {
             arr[i] = str.charAt(i);
@@ -78,7 +76,7 @@ java.lang.ArrayIndexOutOfBoundsException: 25
             System.out.println("char array arr["+i+"]:"+arr[i]); 
         }
 
-        System.out.println("char array length: "+str.length());
+        System.out.println("char array length: "+str.length());  //true length, no '\0'
 
         example.replaceBlank(arr, str.length());   
 
