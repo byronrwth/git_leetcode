@@ -7,7 +7,7 @@ Example:
 Given s = "hello", return "olleh".
  * */
 public class ReverseString344 {
-public String reverseString(String s) {
+	public String reverseString(String s) {
         
         String reverse = "";
         
@@ -35,8 +35,7 @@ public String reverseString(String s) {
 		else {
 			 second = s.substring( mid);
 		}
-		
-		
+
 		reverse = reverseString(second) + reverseString(first);
 		return reverse;
 	}
