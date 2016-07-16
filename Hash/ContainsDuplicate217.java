@@ -12,7 +12,8 @@ public class ContainsDuplicate217 {
         }
         
         for (int i = 0; i<nums.length ;i++) {
-        	if ( myHashMap.containsKey( nums[i] ) ==true ) {
+        	if ( myHashMap.containsKey( nums[i] ) == true ) {
+        		System.out.println(" duplicate: " + nums[i]);
         		return true;
         	}
         	
@@ -24,7 +25,9 @@ public class ContainsDuplicate217 {
     
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		int[] nums = new int[] { 3, 1 };
+		//ArrayList<Integer> test = new ArrayList<Integer>( Arrays.asList(-2, 2, -3, 4,-1,2,1,-5,3) ) ;
+		
 		System.out.println( containsDuplicate( nums ) );
 	}
 }
