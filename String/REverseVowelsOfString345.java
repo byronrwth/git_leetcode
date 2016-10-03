@@ -10,7 +10,13 @@ Example 2:
 Given s = "leetcode", return "leotcede".
  * */
 public class REverseVowelsOfString345 {
-    public String reverseVowels(String s) {
-        
+    static public String reverseVowels(String s) {
+        return "hello" ;
     }
+    
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		reverseVowels("hi");
+	}
+
 }

@@ -1,4 +1,7 @@
 package String;
+
+import java.util.Arrays;
+
 /*
  * Write a method anagram(s,t) to decide if two strings are anagrams or not.
 
@@ -18,19 +21,26 @@ public class TwoStringsAreAnagrams {
      * @param b: The second string
      * @return true or false
      */
-    public boolean anagram(String s, String t) {
+    static public boolean anagram(String s, String t) {
         if ( s.length() == 0 || t.length() == 0 ) {
         	return false;
         }
+        
         
         if ( s.length() != t.length() ) {
         	return false;
         }
         
-        int[] letterCount = new int[256] ;
+        char[] orderchar1 = s.toCharArray() ;
+        Arrays.sort(orderchar1);
         
-        for (int i = 0; i< s.length();i++) {
-        	letterCount[i]
+        char[] orderchar2 = t.toCharArray() ;
+        Arrays.sort(orderchar2);
+        
+        if (Arrays.equals(orderchar1, orderchar2)) {
+        	return true;
+        }else {
+        	return false;
         }
         
     }
@@ -38,7 +48,12 @@ public class TwoStringsAreAnagrams {
     
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		String s = "abcd";
+		String t = "dcab";
+		String[] strs = {"","","a","ab","ba"};
+		System.out.println(s
+				);
+		//System.out.println( "anagram = " + anagram(s,  t ));
 	}
 
 }
