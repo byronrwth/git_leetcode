@@ -66,18 +66,18 @@ public class BinaryLevelOrderTraversal102 {
 
         while (!queue.isEmpty()) {
 
-            // queue Ã¿´Î³ö¶ÓÁĞµÄ node °Ñ×Ô¼º ×óÓÒ×Ó½Úµã¼Óµ½ queue ¶ÓÎ²
-            // ³ö¶ÓÁĞ µÄnode ¼ÓÈë arraylist ×÷Îª ±éÀú½á¹û·µ»Ø
-            
-            // Ã¿´Î±éÀú queue ÖĞËùÓĞ½Úµã£¬ÕâĞ©½ÚµãÈ«ÊôÓÚÉÏ²ãÊ÷ ×Ó½Úµã
+            // queue æ¯æ¬¡å‡ºé˜Ÿåˆ—çš„ node æŠŠè‡ªå·± å·¦å³å­èŠ‚ç‚¹åŠ åˆ° queue é˜Ÿå°¾
+            // å‡ºé˜Ÿåˆ— çš„node åŠ å…¥ arraylist ä½œä¸º éå†ç»“æœè¿”å›
+
+            // æ¯æ¬¡éå† queue ä¸­æ‰€æœ‰èŠ‚ç‚¹ï¼Œè¿™äº›èŠ‚ç‚¹å…¨å±äºä¸Šå±‚æ ‘ å­èŠ‚ç‚¹
             // this is each level Array
             ArrayList thislevel = new ArrayList();
             int size = queue.size();
             
             for (int i = 0; i < size; i++ ) {
                 TreeNode outNode = queue.poll();
-                
-                // ·µ»ØµÄÊÇ Öµ£¬ ²»ÒªµØÖ·£¡
+
+                // è¿”å›çš„æ˜¯ å€¼ï¼Œ ä¸è¦åœ°å€ï¼
                 thislevel.add(outNode.val);
                 
                 if (outNode.left != null) {
@@ -88,7 +88,7 @@ public class BinaryLevelOrderTraversal102 {
                 }
             }
 
-            // addAll ³¹µ×´òÉ¢ ×Ó½á¹¹
+            // addAll å½»åº•æ‰“æ•£ å­ç»“æ„
             //result.addAll(thislevel); // {1,2,3} --> [1,2,3]
             result.add(thislevel); // {1,2,3} --> [[1],[2,3]]
 

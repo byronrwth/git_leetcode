@@ -37,28 +37,28 @@ public class ValidateBinarySearchTree98 {
     
     public boolean isValidBST(TreeNode root) {
         if (root == null ) {
-        	// 遇见叶节点，也要把previous_node 更新为此叶节点再返回 true， 以防此 叶节点比后面节点值大
-               return true;
-           }
+            // 遇见叶节点，也要把previous_node 更新为此叶节点再返回 true， 以防此 叶节点比后面节点值大
+            return true;
+        }
 
-           // inorder: 左子树遍历
-           if (!isValidBST(root.left)) {
-               return false;
-           }
+        // inorder: 左子树遍历
+        if (!isValidBST(root.left)) {
+            return false;
+        }
+
+        // inorder 升序排列，中节点 一定大于 前一个节点值，前一个节点来自于 当前非空左子树，或上一层根节点
+        if (previous_node != null && previous_node.val >= root.val) {
+            // now previous_node is 来自于 当前非空左子树，或上一层根节点
+            return false;
+        }
+
+        // 前一个node记为当前 root
+        previous_node = root ;
            
-           // inorder 升序排列，中节点 一定大于 前一个节点值，前一个节点来自于 当前非空左子树，或上一层根节点
-           if (previous_node != null && previous_node.val >= root.val) {
-        	   // now previous_node is 来自于 当前非空左子树，或上一层根节点
-               return false;
-           }
+        if (!isValidBST(root.right)) {
+            return false;
+        }
            
-           // 前一个node记为当前 root
-           previous_node = root ;
-           
-           if (!isValidBST(root.right)) {
-               return false;
-           }
-           
-           return true;
+        return true;
     }
 }

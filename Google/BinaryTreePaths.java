@@ -1,5 +1,5 @@
 package Google;
-import java.utils.
+
 
 /**
  * Created by xicheng on 16/10/3.
@@ -26,21 +26,23 @@ import java.utils.
 
 /**
  * Definition of TreeNode:
- * public class TreeNode {
- *     public int val;
- *     public TreeNode left, right;
- *     public TreeNode(int val) {
- *         this.val = val;
- *         this.left = this.right = null;
- *     }
- * }
  */
+
+ public class TreeNode {
+      public int val;
+      public TreeNode left, right;
+      public TreeNode(int val) {
+          this.val = val;
+          this.left = this.right = null;
+      }
+  }
+
 public class BinaryTreePaths {
     /**
      * @param root the root of the binary tree
      * @return all root-to-leaf paths
      */
     public List<String> binaryTreePaths(TreeNode root) {
-        // Write your code here
+
     }
 }
