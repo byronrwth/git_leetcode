@@ -1,5 +1,8 @@
 package Google;
 
+import java.util.ArrayList;
+import java.util.List;
+import tree.TreeNode;
 
 /**
  * Created by xicheng on 16/10/3.
@@ -28,21 +31,93 @@ package Google;
  * Definition of TreeNode:
  */
 
- public class TreeNode {
-      public int val;
-      public TreeNode left, right;
-      public TreeNode(int val) {
-          this.val = val;
-          this.left = this.right = null;
-      }
-  }
+
 
 public class BinaryTreePaths {
+
+
     /**
      * @param root the root of the binary tree
      * @return all root-to-leaf paths
      */
-    public List<String> binaryTreePaths(TreeNode root) {
 
+    // static output array shall NOT be init here, otherwise previous testcase results can not be overwriten !!
+    static ArrayList<String> result ;
+
+    private static void passDownPaths(String thisPath, TreeNode root) {
+        if ( root != null && root.left == null && root.right == null ) {
+            thisPath += "->" ;
+
+            thisPath += root.val ;
+            result.add(thisPath);  // only add the path that leads to leaf node into result
+            return;
+        }
+
+        thisPath += "->" ;
+
+        thisPath += root.val ;
+
+        if (root.left != null) {
+            passDownPaths(thisPath, root.left);
+        }
+        if (root.right != null) {
+            passDownPaths(thisPath, root.right);
+        }
+
+    }
+
+    public static List<String> BinaryTreePaths(TreeNode root) {
+
+        // static output array shall be init here, otherwise previous testcase results can not be overwriten !!
+
+        result = new ArrayList<String>();
+
+        if ( root == null ) {
+            return result;
+        }
+
+        String thislevel = "";
+
+
+        thislevel += root.val;
+
+
+        if (root.left != null) {
+            passDownPaths(thislevel, root.left);
+        }
+        if (root.right != null) {
+            passDownPaths(thislevel, root.right);
+        }
+
+        if (root.right == null && root.left == null ) {
+            result.add( thislevel );
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+
+        System.out.println(" *******  print out each root to leaf path ****** ");
+
+        TreeNode myroot = new TreeNode( 1 );
+
+        System.out.println(" root is  " + myroot.val );
+
+        TreeNode myrootleft = new TreeNode( 2 );
+        TreeNode myrootright = new TreeNode( 3 );
+        myroot.left = myrootleft;
+        myroot.right = myrootright;
+        TreeNode myleftright = new TreeNode( 5 );
+        myrootleft.right = myleftright;
+
+
+        BinaryTreePaths( myroot );
+
+        System.out.println(" size of result is  " + result.size() );
+
+        for ( String path: result
+             ) {
+            System.out.println(" one path is  " + path );
+        }
     }
 }
