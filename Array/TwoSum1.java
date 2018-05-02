@@ -22,7 +22,7 @@ public class TwoSum1 {
         }
         int[] result; 
         
-        
+        //dictionary
         HashMap<Integer , Integer> myMap = new HashMap<Integer , Integer >() ;
             
         int index = 0, index1 = 0, index2 = 0;     
